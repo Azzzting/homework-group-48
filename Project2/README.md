@@ -1,9 +1,13 @@
 #### 实验内容：
 implement the Rho method of reduced SM3
 #### 理论基础：
-思路等同于Pollard Rho:根据一个初始的值，不断进行哈希，最终形成回路。
+思路等同于因子分解中用到的Pollard Rho:根据一个初始的值，不断进行哈希，最终形成回路。
+
+因子分解用到的Pho:
 
 ![img](https://github.com/Azzzting/homework-group-48/blob/main/Project2/img/1.png)
+
+本实验所用到的Rho:
 
 ![img](https://github.com/Azzzting/homework-group-48/blob/main/Project2/img/2.png)
 
@@ -12,3 +16,11 @@ implement the Rho method of reduced SM3
 令变量 $i$ 在数列中迭代：第一轮迭代 $1$ 次得到 $H_1$，将其与 $H_0$ 比较；第二轮迭代 $2$ 次得到 $H_2$ 和 $H_3$，依次与 $H_1$ 比较；第三轮迭代 $4$ 次得到 $H_4$, $H_5$, $H_6$ 和 $H_7$，依次与 $H_3$ 比较……如是重复，每轮迭代 $2^{n-1}$ 次，并依次与上一轮最后一次迭代得到的值比较，直到比较出相同为止，此时 $i$ 在当前轮中迭代的次数即为 $\rho$ 。
 
 #### 实验结果：
+![img](https://github.com/Azzzting/homework-group-48/blob/main/Project2/img/3.png)
+
+#### 实验不足：
+通过对实验数据的测试发现，随着bit数不断增长，所消耗时间激增。
+
+可能的原因是代码中采用循环结构，当构造的消息长度较长时，程序运行时间受到明显影响。
+
+在后续的实现中可以采用多线程、循环展开、流水线等可能改进的措施进行尝试与改进。
