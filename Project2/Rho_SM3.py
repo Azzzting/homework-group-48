@@ -20,7 +20,7 @@ def Rho_SM3(n):
 
 
 if __name__ == '__main__':
-    n=16#攻击bit数
+    n=8#攻击bit数
     print("攻击bit数为：",n)
     start = time.time()
     res=Rho_SM3(n)
