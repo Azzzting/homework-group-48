@@ -1,10 +1,10 @@
-#### 实验内容：
+### 实验内容：
 do your best to optimize SM3 implementation (software)
-#### 理论基础：
+### 理论基础：
 一般对于程序性能的优化，可以采取以下几种常见方式：减少循环结构，对其进行循环展开等操作；利用存储结构的局部性，时间局部性和空间局部性，减少对数组的存取操作等；利用并行性，SIMD、数据流等方法。
 
 对于具体的SM3算法，可以通过分析其算法结构，有针对性的进行优化：消息扩展部分、压缩函数部分等关键部件。
-#### 实验思路：
+### 实验思路：
 本次实验采取对已有的SM3算法进行优化，通过对同样数据量的时间消耗测量显示优化结果。
 
 ##### 优化点1：消息扩展
@@ -27,26 +27,30 @@ do your best to optimize SM3 implementation (software)
 将类似：
 ```c
 for (...)
-
 {
-
 	if (str[i] >= 'A' && str[i] <= 'F')
-
-		///
-
-	///
-
 }
 ```
 代码中的数组访问用临时变量代替：
 ```c
-char temp = str[i];
-
+for(...)
+{
+        char temp = str[i];
 	if (temp >= 'A' && temp <= 'F')
+}
 ```
 ##### 优化点4：利用移位运算代替乘除
 可将*2操作用<<1代替，在计算机中，移位操作比乘除法操作更友好。
 ##### 优化点5：多线程，使用SIMD编程
 见代码SIMD实现。
 
-#### 实验结果：
+### 实验结果：
+原始sm3实现：
+
+![img](https://github.com/Azzzting/homework-group-48/blob/main/Project4/img/2.png)
+
+优化后sm3实现：
+
+![img](https://github.com/Azzzting/homework-group-48/blob/main/Project4/img/1.png)
+
+最终在同等数据规模下实现约61.6%的加速。
