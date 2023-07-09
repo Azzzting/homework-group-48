@@ -104,11 +104,6 @@ def ADD(ecmh, msg):
 def single(msg):
     return ADD(0, msg)
 
-def remove(ecmh, msg):
-    dot = msg_to_dot(msg)
-    tmp = EC_sub(ecmh, dot)
-    return tmp
-
 def combine(msg_set):
     ans = single(msg_set[0])
     num = len(msg_set) - 1
@@ -122,7 +117,6 @@ if __name__=="__main__":
 
     print('m1签名:', single(m1))
     print('m2签名:', single(m2))
-    print('combine([m1, m2]\t', combine([m1, m2]))
-    print('combine([m2, m1]\t', combine([m2, m1]))
-    print('ADD(single(m1), m2))', ADD(single(m1), m2))
-    print('remove(combine([m1, m2]), m2)', remove(combine([m1, m2]), m2))
+    print('并集为：', combine([single(m1),single(m2)]))
+    print('交集为：', ADD(single(m1), single(m2))
+
