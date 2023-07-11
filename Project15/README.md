@@ -31,5 +31,10 @@ PGP将对称密钥加密，并使用接收方的公钥进行加密。这种方�
 
 ![img](https://github.com/Azzzting/homework-group-48/blob/main/Project15/img/2.png)
 
-增加网络环境：加入socket编程版本：
+增加网络环境,加入socket编程版本：
+
+![img](https://github.com/Azzzting/homework-group-48/blob/main/Project15/img/3.png)
+![img](https://github.com/Azzzting/homework-group-48/blob/main/Project15/img/4.png)
+#### 实验不足：
+缺少网络环境测试等相关功能，会在后续的学习中继续补充。
 
