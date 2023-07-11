@@ -7,6 +7,7 @@ PGP将对称密钥加密，并使用接收方的公钥进行加密。这种方�
 
 为数据通信提供加密隐私和身份验证。PGP 用于对文本、电子邮件、文件、目录和整个磁盘分区进行签名、加密和解密，并提高电子邮件通信的安全性。
 
+课堂PPT截图：
 ![img](https://github.com/Azzzting/homework-group-48/blob/main/Project15/img/1.png)
 #### 实验思路：
 按以下流程进行分步实现：
