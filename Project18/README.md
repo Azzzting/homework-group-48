@@ -5,8 +5,8 @@ send a tx on Bitcoin testnet, and parse the tx data down to every bit, better wr
 
 如图所示是一笔交易信息：
 
-![img](https://github.com/Azzzting/homework-group-48/tree/main/Project18/img/1.png)
-![img](https://github.com/Azzzting/homework-group-48/tree/main/Project18/img/2.png)
+![img](https://github.com/Azzzting/homework-group-48/blob/main/Project18/img/1.png)
+![img](https://github.com/Azzzting/homework-group-48/blob/main/Project18/img/2.png)
 
 Hash:是这个区块的前一个区块的hash值。也就是矿工要进行计算的值。
 
@@ -38,4 +38,4 @@ Number of transaction：这个区块内部交易的数量。
 
 6.反序列化原始交易数据并打印解析结果
 #### 实验结果：
-![img](https://github.com/Azzzting/homework-group-48/tree/main/Project18/img/3.png)
+![img](https://github.com/Azzzting/homework-group-48/blob/main/Project18/img/3.png)
