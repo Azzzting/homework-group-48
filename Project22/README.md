@@ -67,3 +67,22 @@ def build_block(root, block_pairs):
     for key, value in block_pairs:
         insert(root, key, value)
 ```
+#### 实验结果：
+本实验完成了MPT构建简单构建：
+
+测试信息：
+```python
+
+# 测试
+mpt.insert('num1', '1')
+mpt.insert('num2', '2')
+mpt.insert('num3', '3')
+mpt.insert('num4', '4')
+
+print("key=num1 value=",mpt.search('num1'))  
+print("key=num2 value=",mpt.search('num2'))  
+print("key=num3 value=",mpt.search('num3'))
+print("key=num4 value=",mpt.search('num4'))
+print("key=num5 value=",mpt.search('num5'))
+```
+num1~num4均正确插入，故其可以搜索到。num5并未插入，故返回None。
