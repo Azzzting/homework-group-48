@@ -2,7 +2,7 @@ import hashlib
 
 class MPT:
     def __init__(self):
-        self.db = {}  # 使用字典作为存储数据库
+        self.db = {}
 
     def insert(self, key, value):
         key_hash = self._hash(key)
@@ -15,28 +15,44 @@ class MPT:
     def _insert_to_db(self, key_hash, remaining_key, value):
         if key_hash in self.db:
             node = self.db[key_hash]
-            if isinstance(node, dict):  # 包含子节点的情况
-                self._insert_to_db(node[remaining_key[0]], remaining_key[1:], value)
-            else:  # 叶节点的情况
-                new_node = {remaining_key[0]: node, remaining_key[1:]: value}
-                self.db[key_hash] = new_node
+            if isinstance(node, dict):
+                child_node_key = remaining_key[0]
+                child_node_value = node.get(child_node_key)
+
+                if child_node_value:
+                    self._insert_to_db(child_node_value, remaining_key[1:], value)
+                else:
+                    new_node_key = {remaining_key[0]: {}}
+                    self.db[key_hash].update(new_node_key)
+                    self._insert_to_db(child_node_value, remaining_key[1:], value)
+                        
+            elif node == remaining_key:
+                self.db[key_hash] = value
+            else:
+                new_node_key = {remaining_key[0]: node}
+                self.db[key_hash] = new_node_key
+                self.db[key_hash].update({remaining_key[1:]: value})
         else:
             self.db[key_hash] = {remaining_key: value}
 
     def _get_from_db(self, key_hash, remaining_key):
         if key_hash in self.db:
             node = self.db[key_hash]
-            if isinstance(node, dict):  # 包含子节点的情况
-                return self._get_from_db(node[remaining_key[0]], remaining_key[1:])
+            if isinstance(node, dict):
+                child_node_value = node.get(remaining_key[0])
+                if child_node_value:
+                    return self._get_from_db(child_node_value, remaining_key[1:])
+                else:
+                    return None
             elif node == remaining_key:
                 return node
-            else:  # 叶节点的情况
+            else:
                 return None
         else:
             return None
 
     def _hash(self, data):
-        return hashlib.sha256(data.encode()).hexdigest()  # 假设使用SHA256哈希函数
+        return hashlib.sha256(data.encode()).hexdigest()
 mpt=MPT
 
 # 测试
