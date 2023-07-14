@@ -7,6 +7,8 @@ MPT是对原始Patricia Trie的改进，由Ralph Merkle在1987年提出。其目
 
 MPT的核心思想是使用键的前缀作为树的节点，每个节点都包含一个键和相应的值。通过将键的字节序列拆分为不同的节点，可以有效地共享相同前缀的键，从而减少存储空间的需求。
 
+![img](https://github.com/Azzzting/homework-group-48/blob/main/Project22/img/1.png)
+
 MPT的构建过程如下：
 
 (1)将要存储的键值对按照键进行排序。
@@ -86,3 +88,5 @@ print("key=num4 value=",mpt.search('num4'))
 print("key=num5 value=",mpt.search('num5'))
 ```
 num1~num4均正确插入，故其可以搜索到。num5并未插入，故返回None。
+
+![img](https://github.com/Azzzting/homework-group-48/blob/main/Project22/img/2.png)
