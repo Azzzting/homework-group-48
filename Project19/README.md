@@ -5,7 +5,7 @@ forge a signature to pretend that you are Satoshi
 
 转成ASCII码十六进制为3141317a5031655035514765666932444d505466544c35534c6d7637446976664e61；
 
-伪造私钥的步骤如下：
+PPT中得到伪造私钥的步骤如下：
 
 ![img](https://github.com/Azzzting/homework-group-48/blob/main/Project19/img/2.png)
 #### 实验思路：
