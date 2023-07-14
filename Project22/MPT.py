@@ -1,6 +1,6 @@
 import hashlib
 
-class MerklePatriciaTree:
+class MPT:
     def __init__(self):
         self.db = {}  # 使用字典作为存储数据库
 
@@ -37,14 +37,16 @@ class MerklePatriciaTree:
 
     def _hash(self, data):
         return hashlib.sha256(data.encode()).hexdigest()  # 假设使用SHA256哈希函数
+mpt=MPT
 
-# 测试样例：
-tree = MerklePatriciaTree()
-tree.insert('key1', 'value1')
-tree.insert('key2', 'value2')
-tree.insert('key3', 'value3')
+# 测试
+mpt.insert('num1', '1')
+mpt.insert('num2', '2')
+mpt.insert('num3', '3')
+mpt.insert('num4', '4')
 
-print(tree.get('key1'))  # 输出：value1
-print(tree.get('key2'))  # 输出：value2
-print(tree.get('key3'))  # 输出：value3
-print(tree.get('key4'))  # 输出：None
+print("key=num1 value=",mpt.search('num1'))  
+print("key=num2 value=",mpt.search('num2'))  
+print("key=num3 value=",mpt.search('num3'))
+print("key=num4 value=",mpt.search('num4'))
+print("key=num5 value=",mpt.search('num5'))
