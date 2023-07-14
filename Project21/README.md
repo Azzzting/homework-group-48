@@ -41,3 +41,4 @@ Schnorr Batch是指Schnorr签名的批量处理技术。Schnorr签名是一种�
 
 -使用公钥、摘要和基点，验证签名的有效性。
 #### 实验结果：
+![img](https://github.com/Azzzting/homework-group-48/blob/main/Project21/img/1.png)
