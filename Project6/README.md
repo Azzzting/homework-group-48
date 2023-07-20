@@ -23,4 +23,7 @@ Range Proof是一种协议或机制，用于证明某个数值或数值范围的
 
 (7)如果验证通过，Bob确认Alice的年龄大于21岁；否则，认为验证失败。
 #### 实验结果：
+proof_Hash_Function.py函数是对协议的具体实现，可以进行无网络的验证。
+
+test.py函数是加上网络通信之后的实现。
 ![img](https://github.com/Azzzting/homework-group-48/blob/main/Project6/img/2.png)
