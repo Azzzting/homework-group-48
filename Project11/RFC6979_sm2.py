@@ -24,15 +24,12 @@ def deterministic_generate_k(msghash, priv):
     v = hmac.new(k, v, hashlib.sha256).digest()
     return bytes_to_int(hmac.new(k, v, hashlib.sha256).digest())
     
-i="123"
-i_sha = hashlib.sha256(i.encode('utf-8')).digest()
-i_priv=i.encode(encoding="utf8",errors="strict")
-k=deterministic_generate_k(i_sha,i_priv)
+a="123"
+a_sha = hashlib.sha256(a.encode('utf-8')).digest()
+a_priv=a.encode(encoding="utf8",errors="strict")
+k=deterministic_generate_k(a_sha,a_priv)
 print(k)
-#---RFC4979中生成随机数k------
-# print(str(hex(k)[2:66]))
 
-#16进制的公钥和私钥
 private_key = '00B9AB0B828FF68872F21A837FC303668428DEA11DCD1B24429D0C99E24EED83D5'
 public_key = 'B9C9A6E04E9C91F7BA880429273747D7EF5DDEB0BB2FF6317EB00BEF331A83081A6994B8993F3F5D6EADDDB81872266C87C018FB4162F5AF347B483E24620207'
 sm2_crypt = sm2.CryptSM2(public_key=public_key, private_key=private_key)    
@@ -44,9 +41,9 @@ print(enc_data)
 print(dec_data)
 if(dec_data == data):
   print("加解密一致")
-data = b"111" # bytes类型
+data = b"111" 
 random_hex_str = func.random_hex(sm2_crypt.para_len)
 priv_And_k=random_hex_str
-sign = sm2_crypt.sign(data,priv_And_k) #  16进制    
-if(sm2_crypt.verify(sign, data)): #  16进制
+sign = sm2_crypt.sign(data,priv_And_k)    
+if(sm2_crypt.verify(sign, data)): 
   print("验证签名成功")
