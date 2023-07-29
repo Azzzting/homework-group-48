@@ -1,8 +1,6 @@
-#定义散列、ECDSA签名和ECDSA签名验证函数
 from pycoin.ecdsa import generator_secp256k1, sign, verify
 import hashlib, secrets
 
-#哈希函数
 def sha3_256Hash(msg):
     hashBytes = hashlib.sha3_256(msg.encode("utf8")).digest()
     return int.from_bytes(hashBytes, byteorder="big")
@@ -21,7 +19,7 @@ def verifyECDSAsecp256k1(msg, signature, pubKey):
 
 
 # ECDSA签署消息
-msg = "Message for ECDSA signing"
+msg = "1234567890"
 privKey = secrets.randbelow(generator_secp256k1.order())
 signature = signECDSAsecp256k1(msg, privKey)
 print("私钥:", hex(privKey))
