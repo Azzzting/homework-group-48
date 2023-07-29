@@ -1,71 +1,67 @@
 import copy
 import hashlib
-def get_gcd(a, b):
+
+def GCD(a, b):
     k = a // b
-    remainder = a % b
-    while remainder != 0:
+    c = a % b
+    while c != 0:
         a = b
-        b = remainder
+        b = c
         k = a // b
-        remainder = a % b
+        c = a % b
     return b
 
 
-# 改进欧几里得算法求线性方程的x与y
-def get_(a, b):
+def xy(a, b):
     if b == 0:
         return 1, 0
     else:
         k = a // b
-        remainder = a % b
-        x1, y1 = get_(b, remainder)
+        c = a % b
+        x1, y1 = xy(b, c)
         x, y = y1, x1 - k * y1
     return x, y
 
-
-# 返回乘法逆元
-def multi_inverse(a, b):
-    # 将初始b的绝对值进行保存
+def inverse(a, b):
     if b < 0:
         m = abs(b)
     else:
         m = b
 
-    flag = get_gcd(a, b)
+    flag = GCD(a, b)
     # 判断最大公约数是否为1，若不是则没有逆元
     if flag == 1:
-        x, y = get_(a, b)
+        x, y = xy(a, b)
         x0 = x % m  
         return x0
 
     else:
-        print("Do not have!")
+        print("fail!")
 
-### y^2=x^3+ax+by mod (mod_value)
-def Point_Add(P,Q):
+def Add(P,Q):
     if P[0] == Q[0]:
-        fenzi = (3 * pow(P[0], 2) + a)
-        fenmu = (2 * P[1])
-        if fenzi % fenmu != 0:
-            val = multi_inverse(fenmu, 17)
-            y = (fenzi * val) % 17
+        a = (3 * pow(P[0], 2) + a)
+        b = (2 * P[1])
+        if a % b != 0:
+            val = inverse(b, 17)
+            y = (a * val) % 17
         else:
-            y = (fenzi / fenmu) % 17
+            y = (a / b) % 17
     else:
-        fenzi = (Q[1] - P[1])
-        fenmu = (Q[0] - P[0])
-        if fenzi % fenmu != 0:
-            val = multi_inverse(fenmu, 17)
-            y = (fenzi * val) % 17
+        a = (Q[1] - P[1])
+        b = (Q[0] - P[0])
+        if a % b != 0:
+            val = inverse(b, 17)
+            y = (a * val) % 17
         else:
-            y = (fenzi / fenmu) % 17
+            y = (a / b) % 17
 
     Rx = (pow(y, 2) - P[0] - Q[0]) % 17
     Ry = (y * (P[0] - Rx) - P[1]) % 17
     return(Rx,Ry)
 
 
-def Multi(n, point):
+def mul(n, point):
     if n == 0:
          return 0
     elif n == 1:
@@ -73,40 +69,28 @@ def Multi(n, point):
 
     t = point
     while (n >= 2):
-        t = Point_Add(t, point)
+        t = Add(t, point)
         n = n - 1
     return t
 
 
 def double(point):
-    return Point_Add(point,point)
+    return Add(point,point)
 
 
-def fast_Multi(n, point):
-    if n == 0:
-         return 0
-    elif n == 1:
-        return point
-    elif n%2==0:
-        return Multi(n/2,double(point))
-    else:
-        return Point_Add(Multi((n-1)/2,double(point)),point)
-
-
-def ECDSA_Sign(m, G, d,k):
+def sign(m, G, d,k):
     e = Hash(m)
-    R = Multi(k, G)   #R=kg
-    #print("R",R)
-    r = R[0] % mod_value      #r=R[x] mod mod_value
-    s = (multi_inverse(k, mod_value) * (e + d * r)) % mod_value
+    R = mul(k, G)   #R=kg
+    r = R[0] % mod_value   
+    s = (inverse(k, mod_value) * (e + d * r)) % mod_value
     return r, s
 
-def ECDSA_Verify(m, G, r, s, P):
+def verify(m, G, r, s, P):
     e = Hash(m)
-    w = multi_inverse(s, mod_value)
-    ele1 = (e * w) % mod_value
-    ele2 = (r * w) % mod_value
-    w = Point_Add(Multi(ele1, G), Multi(ele2, P))
+    w = inverse(s, mod_value)
+    e1 = (e * w) % mod_value
+    e2 = (r * w) % mod_value
+    w = Add(mul(e1, G), mul(e2, P))
     if (w == 0):
         print('false')
         return False
@@ -126,15 +110,15 @@ def Hash(string):
 
 
 def deduce_pubkey(s, r, k, G):
-    ele1=multi_inverse((s+r),17)
+    e1=inverse((s+r),17)
 
-    ele2=Multi(k,G)
+    e2=mul(k,G)
 
-    ele3=Multi(s,G)
-    ele4=(ele3[0],(-ele3[1])%17)
-    print(ele2,ele4)
+    e3=mul(s,G)
+    e4=(e3[0],(-e3[1])%17)
+    print(e2,e4)
 
-    result=Point_Add(ele2,ele4)
+    result=Add(e2,e4)
 
     print("根据签名推出公钥",result)
 
@@ -145,8 +129,8 @@ G=[7,1]
 k=2
 message="1234567890"
 d=5
-r,s=ECDSA_Sign(message,G,d,k)
-P = Multi(d, G)
+r,s=sign(message,G,d,k)
+P = mul(d, G)
 print("公钥为",P)
-ECDSA_Verify(message,G,r,s,P)
+verify(message,G,r,s,P)
 deduce_pubkey(s,r,k,G)
