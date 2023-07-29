@@ -15,6 +15,10 @@ Firefox用户可以在浏览器设置中设置主密码，但是很多用户对�
 
 然而，如果用户没有设置主密码，系统将使用空密码。这意味着攻击者可以提取全局盐，并使用该盐与空密码进行哈希运算，然后使用得到的结果来破解SDR密钥，从而危害用户的证书。
 
+图源网络：
+
+![img](https://github.com/Azzzting/homework-group-48/blob/main/Project17/3.png)
+
 
 chrome：
 
