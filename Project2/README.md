@@ -1,9 +1,9 @@
 #### 实验内容：
 implement the Rho method of reduced SM3
 #### 理论基础：
-思路等同于因子分解中用到的Pollard Rho:根据一个初始的值，不断进行哈希，最终形成回路。
+思路等同于在密码学引论中涉及到因子分解时用到的Pollard Rho:根据一个初始的值，不断进行哈希，最终形成回路。
 
-因子分解用到的Pho:
+因子分解用到的Rho:
 
 ![img](https://github.com/Azzzting/homework-group-48/blob/main/Project2/img/1.png)
 
@@ -11,9 +11,49 @@ implement the Rho method of reduced SM3
 
 ![img](https://github.com/Azzzting/homework-group-48/blob/main/Project2/img/2.png)
 
-考虑数列 $\lbrace H_n\rbrace$，其中 $H_{n+1}=hash(H_n)$，易知该数列最终一定会进入一个循环，且数列进入循环前的最后一个值与该循环周期的最后一个值能够发生碰撞。设此循环的周期为 $\rho$，求出该 $\rho$ 的值，然后，令变量 $i$ 和 $j$ 分别从 $H_0$ 和 $H_\rho$ 出发同步迭代，并逐次比较 $i$ 和 $j$ 的值，当判断出二者第一次相等时，即找到了碰撞发生的位置。
+伪代码实现：
+```python
+Function PollardRho(n):
+    x ← 2
+    y ← 2
+    d ← 1
+    
+    Function f(x):
+        return (x^2 + 1) % n
+    
+    While d == 1:
+        x ← f(x)
+        y ← f(f(y))
+        d ← gcd(|x - y|, n)
+    
+    If d == n:
+        Return "Failure"
+    Else:
+        Return d
+
+```
+
 #### 实验思路：
-令变量 $i$ 在数列中迭代：第一轮迭代 $1$ 次得到 $H_1$，将其与 $H_0$ 比较；第二轮迭代 $2$ 次得到 $H_2$ 和 $H_3$，依次与 $H_1$ 比较；第三轮迭代 $4$ 次得到 $H_4$, $H_5$, $H_6$ 和 $H_7$，依次与 $H_3$ 比较……如是重复，每轮迭代 $2^{n-1}$ 次，并依次与上一轮最后一次迭代得到的值比较，直到比较出相同为止，此时 $i$ 在当前轮中迭代的次数即为 $\rho$ 。
+根据伪代码可知具体步骤如下：
+
+(1) 首先，选择一个起始点x和一个用于计算下一个序列项的函数f(x)。通常选择f(x) = (x^2 + 1) % n，其中%表示取模运算。初始化y和d，其中y是通过f(x)计算出来的第二个序列项，d是一个辗转相除法（gcd）的中间结果，默认将d设置为1。
+
+(2) 在一个循环中，重复执行以下步骤，直到找到非平凡因子（即d != 1）或者算法失败（d == n）：
+
+     --更新x为f(x)的结果。
+   
+     --更新y为f(f(y))的结果，即连续两次应用f()函数。
+   
+     --计算|x - y|的绝对值，并利用gcd函数求得|x - y|与n的最大公约数。
+   
+     --如果最大公约数d等于n，表示算法失败，无法找到非平凡因子。
+   
+     --在循环结束后，根据d的值判断算法的结果：
+
+(3) 如果d等于n，表示算法失败，无法找到非平凡因子。否则，d是n的一个非平凡因子。
+
+在具体实现中：考虑使用快速幂算法计算幂，使用Miller-Rabin素性检测来判断质因数的存在性等。
+
 
 #### 实验结果：
 ![img](https://github.com/Azzzting/homework-group-48/blob/main/Project2/img/3.png)
