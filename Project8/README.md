@@ -1,6 +1,6 @@
-#### 实验内容：
+### 实验内容：
 AES impl with ARM instruction
-#### 理论基础：
+### 理论基础：
 ARM Cryptography Extension: 在ARM架构中引入了用于加密和安全应用的指令集扩展。官方文档可以提供关于这些指令集的详细信息.   
 https://developer.arm.com/architectures/instruction-sets/simd-isas/arm-crypto-extensions
 
@@ -9,16 +9,8 @@ ARM Cryptography Extension为ARM处理器提供了专门的AES指令，以加速
 使用AES指令集可以提供硬件级别的优化，从而加速加密和解密过程，减少处理器的负载，并提高系统的安全性。ARM Cryptography Extension还提供其他的加密指令，如SHA-1和SHA-256哈希函数、3DES加密等，进一步增强了ARM架构上的密码学功能。
 
 通过利用ARM处理器上的硬件加速AES指令集，开发人员可以实现高效且安全的AES加密算法，提高系统的性能和安全性，适用于诸如物联网设备、移动设备、网络设备和服务器等各种应用场景。
-#### 实验思路：
-(1)将AES密钥加载到AES密钥寄存器中。
-
-(2)将明文数据加载到寄存器中。
-
-(3)设置AES控制寄存器，指定加密/解密模式、密钥长度、输入和输出格式。
-
-(4)调用AES指令执行加密/解密操作。
-
-实验伪代码：(此伪代码源于网络)
+### 实验思路：
+#### 关键步骤伪代码：(此伪代码源于网络)
 ```c
 // 假设明文已加载到寄存器X0-X3
 // 假设加密密钥已加载到寄存器X4-X7
@@ -41,5 +33,14 @@ AESMC V4, V2
 // 从AESDOUTR寄存器中提取密文
 MRS V5, AESDOUTR
 ```
+#### 实验思路总结：
+    (1)将AES密钥加载到AES密钥寄存器中。
+
+    (2)将明文数据加载到寄存器中。
+
+    (3)设置AES控制寄存器，指定加密/解密模式、密钥长度、输入和输出格式。
+
+    (4)调用AES指令执行加密/解密操作。
+
 #### 实验结果：
 ![img](https://github.com/Azzzting/homework-group-48/blob/main/Project8/img/1.png)
