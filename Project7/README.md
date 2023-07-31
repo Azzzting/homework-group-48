@@ -69,5 +69,4 @@ def calculate_hash(self):
     代码返回值是其sha().hexdigest()
     进行验证：符合要求返回2，3，4
 ![img](https://github.com/Azzzting/homework-group-48/blob/main/Project7/img/2.png)
-### 实验不足：
-由于理论较高深，自身水平有限，未能完整实现文档中提及的功能。会在后续的学习中继续努力。
+
