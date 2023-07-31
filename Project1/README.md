@@ -15,7 +15,7 @@ implement the naïve birthday attack of reduced SM3
 
 如果想要概率达到99.9% ，那么只需要70个人就够了。50%的概率只需要23个人。
 
-![image](https://github.com/Azzzting/homework-group-48/blob/main/Project1/img/5.png)
+![image](https://github.com/Azzzting/homework-group-48/blob/main/Project1/img/4.png)
 
 根据上述描述我们可以得到如下公式：
 
