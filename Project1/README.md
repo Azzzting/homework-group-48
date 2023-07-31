@@ -7,7 +7,7 @@ implement the naïve birthday attack of reduced SM3
 
 (2)构造出有效消息是容易的
 
-生日攻击及复杂度推到：
+##### 生日攻击及复杂度推导：
 
 生日问题也叫做生日悖论，它是这样这样描述的。
 
@@ -15,17 +15,16 @@ implement the naïve birthday attack of reduced SM3
 
 如果想要概率达到99.9% ，那么只需要70个人就够了。50%的概率只需要23个人。
 
+##### 概率分布图如下所示：
+
 ![image](https://github.com/Azzzting/homework-group-48/blob/main/Project1/img/4.png)
 
-根据上述描述我们可以得到如下公式：
-
-达到50%成功率的需要：
+根据上述描述我们可以得到如下公式，达到50%成功率的需要：
 
 ![image](https://github.com/Azzzting/homework-group-48/assets/138744150/669d00e2-d96f-4535-88e4-725e2612e85f)
 
-即得到了复杂度O(2^n/2)
+##### 即得到了复杂度近似为O(2^n/2)
 
-SM3实现算法来源于网络。
 
 #### 实验思路：
 本实验采取在消息空间中随机构造明文并对其进行加密，将加密结果与之前存入的结果进行对比：对比不成功则加入；对比成功时，说明找到了碰撞。
