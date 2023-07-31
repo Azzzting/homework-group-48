@@ -13,7 +13,6 @@ ECMH的理论依据是基于椭圆曲线上的离散对数问题，该问题是�
 
 在达到相同安全性的同时，ECMH算法需要的密钥长度远远小于哈希求和算法，因而ECMH相较哈希求和算法更为安全。
 
-PPT:
 ![img](https://github.com/Azzzting/homework-group-48/blob/main/Project13/img/3.png)
 
 ### 实验思路：
