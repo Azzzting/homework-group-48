@@ -1,26 +1,26 @@
 import copy
 import hashlib
-
-def GCD(a, b):
+def gcd(a, b):
     k = a // b
-    c = a % b
-    while c != 0:
+    remainder = a % b
+    while remainder != 0:
         a = b
-        b = c
+        b = remainder
         k = a // b
-        c = a % b
+        remainder = a % b
     return b
 
 
-def xy(a, b):
+def get_xy(a, b):
     if b == 0:
         return 1, 0
     else:
         k = a // b
-        c = a % b
-        x1, y1 = xy(b, c)
+        remainder = a % b
+        x1, y1 = get_xy(b, remainder)
         x, y = y1, x1 - k * y1
     return x, y
+
 
 def inverse(a, b):
     if b < 0:
@@ -28,33 +28,33 @@ def inverse(a, b):
     else:
         m = b
 
-    flag = GCD(a, b)
-    # 判断最大公约数是否为1，若不是则没有逆元
+    flag = gcd(a, b)
     if flag == 1:
-        x, y = xy(a, b)
+        x, y = get_xy(a, b)
         x0 = x % m  
         return x0
 
     else:
-        print("fail!")
+        print("Do not have!")
 
-def Add(P,Q):
+### y^2=x^3+ax+by mod (mod_value)
+def add(P,Q):
     if P[0] == Q[0]:
-        a = (3 * pow(P[0], 2) + a)
-        b = (2 * P[1])
-        if a % b != 0:
-            val = inverse(b, 17)
-            y = (a * val) % 17
+        b = (3 * pow(P[0], 2) + a)
+        c = (2 * P[1])
+        if b % c != 0:
+            val = inverse(c, 17)
+            y = (b * val) % 17
         else:
-            y = (a / b) % 17
+            y = (b / c) % 17
     else:
-        a = (Q[1] - P[1])
-        b = (Q[0] - P[0])
-        if a % b != 0:
-            val = inverse(b, 17)
-            y = (a * val) % 17
+        b = (Q[1] - P[1])
+        c = (Q[0] - P[0])
+        if b % c != 0:
+            val = inverse(c, 17)
+            y = (b * val) % 17
         else:
-            y = (a / b) % 17
+            y = (b / c) % 17
 
     Rx = (pow(y, 2) - P[0] - Q[0]) % 17
     Ry = (y * (P[0] - Rx) - P[1]) % 17
@@ -69,28 +69,29 @@ def mul(n, point):
 
     t = point
     while (n >= 2):
-        t = Add(t, point)
+        t = add(t, point)
         n = n - 1
     return t
 
 
 def double(point):
-    return Add(point,point)
+    return add(point,point)
+
 
 
 def sign(m, G, d,k):
     e = Hash(m)
-    R = mul(k, G)   #R=kg
-    r = R[0] % mod_value   
+    R = mul(k, G)  
+    r = R[0] % mod_value
     s = (inverse(k, mod_value) * (e + d * r)) % mod_value
     return r, s
 
 def verify(m, G, r, s, P):
     e = Hash(m)
     w = inverse(s, mod_value)
-    e1 = (e * w) % mod_value
-    e2 = (r * w) % mod_value
-    w = Add(mul(e1, G), mul(e2, P))
+    ele1 = (e * w) % mod_value
+    ele2 = (r * w) % mod_value
+    w = add(mul(ele1, G), mul(ele2, P))
     if (w == 0):
         print('false')
         return False
@@ -110,15 +111,15 @@ def Hash(string):
 
 
 def deduce_pubkey(s, r, k, G):
-    e1=inverse((s+r),17)
+    ele1=inverse((s+r),17)
 
-    e2=mul(k,G)
+    ele2=mul(k,G)
 
-    e3=mul(s,G)
-    e4=(e3[0],(-e3[1])%17)
-    print(e2,e4)
+    ele3=mul(s,G)
+    ele4=(ele3[0],(-ele3[1])%17)
+    print(ele2,ele4)
 
-    result=Add(e2,e4)
+    result=add(ele2,ele4)
 
     print("根据签名推出公钥",result)
 
