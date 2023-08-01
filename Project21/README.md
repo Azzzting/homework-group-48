@@ -15,6 +15,7 @@ Schnorr Batch是指Schnorr签名的批量处理技术。Schnorr签名是一种�
 签名方案的安全性：签名方案应该满足不可伪造性、消息可验证性和消息不可更改性。
 
 基于这两个原则，Schnorr批处理签名方案可以实现多个输入的签名，并保证签名的安全性和可验证性。
+
 ![img](https://github.com/Azzzting/homework-group-48/blob/main/Project21/img/2.png)
 ### 实验思路：
 
