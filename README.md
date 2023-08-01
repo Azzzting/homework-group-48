@@ -44,7 +44,7 @@ https://github.com/Azzzting/homework-group-48/tree/main/Project8
 
 *Project9: AES / SM4 software implementation
 
-https://github.com/Azzzting/homework-group-48/tree/main/Project9
+https://github.com/Azzzting/homework-group-48/tree/main/Projet9
 
 *Project10: report on the application of this deduce technique in Ethereum with ECDSA
 
