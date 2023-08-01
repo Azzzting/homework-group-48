@@ -25,24 +25,19 @@ def get_inverse(a, b):
     return XGCD(a, b)[0] % b
 
 
-# 求最大公约数——用于约分化简
 def get_gcd(x, y):
     if y == 0:
         return x
     else:
         return get_gcd(y, x % y)
 
-    # 计算P+Q函数
-
 
 def calculate_p_q(x1, y1, x2, y2, a, b, p):
-    flag = 1  # 控制符号位
-
+    flag = 1 
     # 若P = Q，则k=[(3x1^2+a)/2y1]mod p
     if x1 == x2 and y1 == y2:
-        member = 3 * (x1 ** 2) + a  # 计算分子
-        denominator = 2 * y1  # 计算分母
-
+        member = 3 * (x1 ** 2) + a  
+        denominator = 2 * y1
     # 若P≠Q，则k=(y2-y1)/(x2-x1) mod p
     else:
         member = y2 - y1
@@ -64,13 +59,12 @@ def calculate_p_q(x1, y1, x2, y2, a, b, p):
         k = -k
     k = k % p
 
-    # 计算x3,y3
     x3 = (k ** 2 - x1 - x2) % p
     y3 = (k * (x1 - x3) - y1) % p
     return [x3, y3]
 
 
-# 计算2P函数
+
 def calculate_2p(p_x, p_y, a, b, p):
     tem_x = p_x
     tem_y = p_y
@@ -80,7 +74,6 @@ def calculate_2p(p_x, p_y, a, b, p):
     return p_value
 
 
-# 计算nP函数
 def calculate_np(p_x, p_y, n, a, b, p):
     p_value = ["0", "0"]
     p_temp = [0, 0]
