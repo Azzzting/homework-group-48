@@ -1,7 +1,7 @@
-#### 实验内容：
+### 实验内容：
 比较Firefox和谷歌的记住密码插件的实现区别
-#### 理论基础：
-Firefox：
+### 理论基础：
+#### Firefox：
 
 Mozilla开发了名为"Network Security Services"（NSS）的开源库，目的是满足开发者创建符合各种安全标准的应用程序。Firefox使用其中一个叫做"Security Decoder Ring"（SDR）的API来帮助实现账号证书的加密和解密功能。
 
@@ -20,7 +20,7 @@ Firefox用户可以在浏览器设置中设置主密码，但是很多用户对�
 ![img](https://github.com/Azzzting/homework-group-48/blob/main/Project17/3.png)
 
 
-chrome：
+#### chrome：
 
 简单的讲，chrome就是用户系统密码将用户保存在浏览器的密码加密保存在一个SQLite数据库里，保存在电脑里\Chrome\User Data\Default\Login Data 文件中。对这个文件执行一下win32crypt.CryptUnprotectData函数，调用系统解密就可以直接解密出里面保存的密码。换言之，任何程序里面只要使用解密命令就能用当前系统密码去解密chrome的密码文件，就可以查看到把chrome保存的密码。
 
@@ -28,9 +28,11 @@ chrome：
 
 根据参考链接中的内容我们了解到：破解密码，只需要调用Windows API中的CryptUnprotectData函数。幸运地是，Python为调用Windows API准备了一个完美的叫做pywin32的库。这使得破解密码变得非常容易。
 
-总结：综上所述我们可以发现，在安全方面Firefox远高于chrome。
+#### 总结：综上所述我们可以发现，在安全方面Firefox远高于chrome。
 
 #### 参考链接
+在参考链接中给出如何破解chrome得到浏览器储存的密钥信息。
+
 浏览器是如何存储密码的：https://www.cnblogs.com/shoubianxingchen/p/5073077.html
 
 浏览器记住密码的机制：https://www.cnblogs.com/lcl101/p/13305273.html
